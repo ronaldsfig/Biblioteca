@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja Nelson Mandela</title>
-</head>
+<?php require_once "bootstrap/bootstrap.php"; ?>
 <body>
-    <h1>oi</h1>
+
+    <button type="button" class="btn btn-primary">Primary</button>
+
 </body>
 </html>
