@@ -2,7 +2,7 @@
 class connection {
     private $host;
     private $username;
-    private $password
+    private $password;
     private $database;
 
     protected function connect() {
