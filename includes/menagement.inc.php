@@ -1,7 +1,7 @@
 <?php
 class admin extends connection{
 
-    private function getAllUsers(){
+    public function getAllUsers(){
         $sql = "SELECT * FROM usuarios";
         $result = $this->connect()->query($sql);
         $numRows = $result->num_rows;
@@ -15,15 +15,5 @@ class admin extends connection{
         return $data;
     }
 
-    public function viewAllUsers(){
-        $datas = $this->getAllUsers();
-
-        foreach ($datas as $data) {
-            echo "<th scope='row'>".$data['id']."</th>";
-            echo "<td>".$data['nome']."</td>";
-            echo "<td>".$data['data_nascimento']."</td>";
-            echo "<td>".$data['email']."</td>";
-        }
-    }
 }
 ?>
