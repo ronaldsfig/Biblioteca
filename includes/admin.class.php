@@ -1,9 +1,9 @@
 <?php
-class admin extends connection{
+class ADMIN extends CONNECT{
 
     public function getAllUsers(){
         $sql = "SELECT * FROM usuarios";
-        $result = $this->connect()->query($sql);
+        $result = $this->connection()->query($sql);
         $numRows = $result->num_rows;
 
         if ($numRows > 0) {

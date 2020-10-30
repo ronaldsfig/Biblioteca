@@ -13,32 +13,46 @@
 <?php require_once "../layout/sidebar/dashboard_sidebar.php"; ?>
 
 <?php 
-    include "../includes/connection.inc.php"; 
-    include "../includes/menagement.inc.php";
+    include "../includes/connect.class.php"; 
+    include "../includes/admin.class.php";
 ?>
 
     <table class="table table-striped">
     <thead>
         <th colspan="5" scape="col">
-            <button type="button" class="btn btn-secondary">Inserir novo usuário</button>
-            </button>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="navbar-brand">Usuários</a>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">Inserir novo</button>
+                </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Pesquisar</button>
+                </form>
+            </div>
+            </nav>
         </th>
     </thead>
 
-    <form>
+    <form method="post">
     <thead>
         <tr>
         <th scope="col">Registro</th>
         <th scope="col">Nome</th>
         <th scope="col">Data de nascimento</th>
         <th scope="col">E-mail</th>
-        <th scope="col"><button type="submit" class="btn btn-secondary">Ir para ações</button></th>
+        <th scope="col"><button type="submit" name="alterar" class="btn btn-secondary">Ir para ações</button></th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <?php 
-                $usuarios = new admin();
+                $usuarios = new ADMIN();
                     $datas = $usuarios->getAllUsers();
 
                     foreach ($datas as $key) {
@@ -46,40 +60,36 @@
                     echo "<td>".$key['nome']."</td>";
                     echo "<td>".$key['data_nascimento']."</td>";
                     echo "<td>".$key['email']."</td>";
-                    echo "<td><input type='checkbox' name='selected[]' value='".$key['id']."'</td>";
+                    echo "<td><input type='checkbox' name='selected[]' value='".$key['id']."'/></td>";
 
                     }
             ?>
         </tr>
     </tbody>
     </form>
-
     </table>
-
-                
-<div class="modal" tabindex="-1" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+    
+    <form>
+    <div class="modal" tabindex="-1" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+        </div>
     </div>
-  </div>
-</div>
-        
-<script>
-    $('#myModal').modal('show')
-</script>
+    </div>
+    </form>
 
 </body>
 </html>

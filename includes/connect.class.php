@@ -1,11 +1,11 @@
 <?php
-class connection {
+class CONNECT {
     private $host;
     private $username;
     private $password;
     private $database;
 
-    protected function connect() {
+    protected function connection() {
         $this->host = "localhost";
         $this->username = "root";
         $this->password = "";
