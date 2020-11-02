@@ -15,5 +15,9 @@ class CONNECT {
 
         return $conn;
     }
+
+    public function close() {
+        @mysqli_close($this->connection());
+    }
 }
 ?>
