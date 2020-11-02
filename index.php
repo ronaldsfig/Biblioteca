@@ -22,6 +22,7 @@
                     <h4>
                         <center>Loja Nelson Mandela <span class="badge badge-secondary">Nº 206</span></center>
                     </h3>
+					<br>
 					<div class="card fat">
 						<div class="card-body">
 							<h4 class="card-title">Entrar</h4>
@@ -63,9 +64,6 @@
 								</div>
 							</form>
 						</div>
-					</div>
-					<div class="footer">
-						Copyright &copy; 2017 &mdash; Your Company 
 					</div>
 				</div>
 			</div>
