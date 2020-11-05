@@ -17,37 +17,38 @@ session_start();
 
 <body class="my-login-page">
 
-	<?php
-	// <> VERIFICA SE O ACESSO FOI NEGADO
-
-	if (isset($_SESSION['nao_autenticado'])) {
-		echo "não autenticado";
-	}
-	unset($_SESSION['nao_autenticado']);
-
-	// </> VERIFICA SE O ACESSO FOI NEGADO
-	?>
-
 	<section class="h-100">
 		<div class="container h-100">
 			<div class="row justify-content-md-center h-100">
 				<div class="card-wrapper">
 					<div class="brand">
-						<!--img src="images/maconaria.jpg" alt="logo"-->
+						<img src="images/maconaria.jpg" alt="logo">
                     </div>
 					<div class="card fat">
 						<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item active" aria-current="page">
+							<li class="breadcrumb-item" aria-current="page">
 								Loja Maçônica Nelson Mandela
 							</li>
-							<li class="breadcrumb-item">
-								<span class="badge badge-primary">Nº 206</span>
+							<li class="breadcrumb-item active">
+								Nº 206
 							</li>
 						</ol>
 						</nav>
 						<div class="card-body">
 							<h4 class="card-title">Entrar</h4>
+
+							<?php
+							// <> VERIFICA SE O ACESSO FOI NEGADO
+
+							if (isset($_SESSION['nao_autenticado'])) {
+								echo "<div class='alert alert-danger' role='alert'>Email ou senha inválidos!</div>";
+							}
+							unset($_SESSION['nao_autenticado']);
+
+							// </> VERIFICA SE O ACESSO FOI NEGADO
+							?>
+
 							<form method="post" class="my-login-validation" novalidate="" action="login.php">
 
 								<div class="form-group">
