@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -5,28 +9,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loja Nelson Mandela</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
-    <script src="layout/login/js/my-login.js"></script>
-    <link rel="stylesheet" type="text/css" href="layout/login/css/mylogin.css">
+    <script src="layout/js/login.js"></script>
+    <link rel="stylesheet" type="text/css" href="layout/css/login.css">
     <script type="text/javascript" src="bootstrap/js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 
 <body class="my-login-page">
+
+	<?php
+	// <> VERIFICA SE O ACESSO FOI NEGADO
+
+	if (isset($_SESSION['nao_autenticado'])) {
+		echo "não autenticado";
+	}
+	unset($_SESSION['nao_autenticado']);
+
+	// </> VERIFICA SE O ACESSO FOI NEGADO
+	?>
+
 	<section class="h-100">
 		<div class="container h-100">
 			<div class="row justify-content-md-center h-100">
 				<div class="card-wrapper">
 					<div class="brand">
-						<img src="images/maconaria.jpg" alt="logo">
+						<!--img src="images/maconaria.jpg" alt="logo"-->
                     </div>
-                    <h4>
-                        <center>Loja Nelson Mandela <span class="badge badge-secondary">Nº 206</span></center>
-                    </h3>
-					<br>
 					<div class="card fat">
+						<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item active" aria-current="page">
+								Loja Maçônica Nelson Mandela
+							</li>
+							<li class="breadcrumb-item">
+								<span class="badge badge-primary">Nº 206</span>
+							</li>
+						</ol>
+						</nav>
 						<div class="card-body">
 							<h4 class="card-title">Entrar</h4>
-							<form method="POST" class="my-login-validation" novalidate="">
+							<form method="post" class="my-login-validation" novalidate="" action="login.php">
+
 								<div class="form-group">
 									<label for="email">E-mail</label>
 									<input id="email" type="email" class="form-control" name="email" value="" required autofocus>
@@ -59,9 +82,7 @@
 										Entrar
 									</button>
 								</div>
-								<div class="mt-4 text-center">
-									Possui uma chave de acesso? <a href="register.html">Registre-se</a>
-								</div>
+
 							</form>
 						</div>
 					</div>

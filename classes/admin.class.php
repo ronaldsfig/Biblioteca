@@ -1,8 +1,6 @@
 <?php
 class ADMIN extends CONNECT{
 
-    private $insertedUser = array();
-
     public function getAllUsers(){
         $sql = "SELECT * FROM usuarios";
         $result = $this->connection()->query($sql);
@@ -13,11 +11,11 @@ class ADMIN extends CONNECT{
                 $data[] = $row;
             };
         }
-        
+
         return $data;
     }
 
-    public function verifyInsertDatas($nomeUsuario, $emailUsuario, $senhaUsuario, $confirmaSenhaUsuario, $nascimentoUsuario, $permUsuario){
+    public function insertNewUser($nomeUsuario, $emailUsuario, $senhaUsuario, $confirmaSenhaUsuario, $nascimentoUsuario, $permUsuario){
 
         if ($senhaUsuario !== $confirmaSenhaUsuario) {
             return 'Informe corretamente as senhas!';
@@ -26,7 +24,6 @@ class ADMIN extends CONNECT{
 
         $sqlEmail = "SELECT * FROM usuarios WHERE email = '$emailUsuario'";
         $resultEmail = $this->connection()->query($sqlEmail);
-
         $sqlPassword = "SELECT * FROM usuarios WHERE senha = '$senhaUsuario'";
         $resultPassword = $this->connection()->query($sqlPassword);
 
@@ -40,21 +37,11 @@ class ADMIN extends CONNECT{
             exit;
         }
 
-        $this->insertedUser["nome"] = $nomeUsuario;
-        $this->insertedUser["email"] = $emailUsuario;
-        $this->insertedUser["senha"] = $senhaUsuario;
-        $this->insertedUser["data_nascimento"] = $nascimentoUsuario;
-        $this->insertedUser["perm"] = $permUsuario;
-
-        return true;
-    }
-
-    public function insertNewUser(){
-        $sql = "INSERT INTO usuarios (nome, email, senha, data_nascimento, perm) VALUES ('{$this->insertedUser['nome']}', '{$this->insertedUser['email']}', MD5('{$this->insertedUser['senha']}'), '{$this->insertedUser['data_nascimento']}', '{$this->insertedUser['perm']}')";
-        if ($this->connection()->query($sql) === TRUE) {
+        $sqlInsert = "INSERT INTO usuarios (nome, email, senha, data_nascimento, perm) VALUES ('{$nomeUsuario}','{$emailUsuario}',MD5('{$senhaUsuario}'),'{$nascimentoUsuario}','{$permUsuario}')";
+        if ($this->connection()->query($sqlInsert) === TRUE) {
             return true;
-        } else {
-            return false;
+        }else {
+            return 'Erro ao cadastrar!';
         }
     }
 
