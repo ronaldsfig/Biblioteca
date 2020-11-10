@@ -36,28 +36,24 @@ include "../classes/admin.class.php";
         // </>VERIFICA SE HOUVE UMA TENTATIVA DE ADICIONAR UM USUARIO
     ?>
 
-    <table class="table table-striped">
-        <thead>
-            <th colspan="6" scape="col">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="navbar-brand">Usuários</a>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">Adicionar novo</button>
-                    </li>
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Pesquisar</button>
-                    </form>
-                </div>
-                </nav>
-            </th>
-        </thead>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="navbar-brand">Usuários</a>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">Adicionar novo</button>
+            </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Pesquisar</button>
+            </form>
+        </div>
+    </nav>
 
+    <table class="table table-striped">
         <form method="post">
         <thead>
             <tr>

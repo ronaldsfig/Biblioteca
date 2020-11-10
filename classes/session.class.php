@@ -9,11 +9,19 @@ class SESSION extends CONNECT{
         $this->loginEmail = mysqli_real_escape_string($this->connection(), $email);
         $this->loginPassword = mysqli_real_escape_string($this->connection(), $password);
 
+        //$sql = "SELECT * FROM usuarios WHERE email = '{$this->loginEmail}' AND senha = MD5('{$this->loginPassword}')";
         $sql = "SELECT * FROM usuarios WHERE email = '{$this->loginEmail}' AND senha = '{$this->loginPassword}'";
         $result = $this->connection()->query($sql);
 
         if ($result->num_rows == 1) {
             $data = $result->fetch_assoc();
+
+            if ($data['condicao'] == 'disable') {
+                $_SESSION['nao_autenticado'] = true;
+                header('Location: index.php');
+                exit();
+            };
+
             switch ($data['perm']) {
                 case 0:
                     $_SESSION['user'] = $data;
@@ -21,30 +29,17 @@ class SESSION extends CONNECT{
                     exit();
                     break;
 
-                case 1:
+                default:
                     $_SESSION['user'] = $data;
                     header('Location: user/index.php');
                     exit();
                     break;
-
-                case 2:
-                    echo "nivel 2";
-                    exit();
-                    break;
-
-                case 3:
-                    echo "nivel 3";
-                    exit();
-                    break;
-                
-                default:
-                    # code...
-                    exit();
-                    break;
+                    
             }
         }else {
             $_SESSION['nao_autenticado'] = true;
             header('Location: index.php');
+            exit();
         }
 
     }

@@ -1,8 +1,8 @@
 <?php
 session_start();
-include "session/verify.php";
 include "../classes/connect.class.php";
 include "../classes/user.class.php";
+include "session/verify.php";
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +21,26 @@ include "../classes/user.class.php";
     <?php
         require_once "../layout/user.php";
     ?>
+
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">Nova publicação</span>
+    </nav>
+
+    <form method="post" action="publicar.act.php">
+
+    <div class="input-group input-group-lg mb-2">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-lg">Título</span>
+        </div>
+        <input type="text" name="titulo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Subtítulo</span>
+        </div>
+        <input type="text" name="subtitulo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css" />
@@ -72,7 +92,7 @@ include "../classes/user.class.php";
         <button class="ql-clean"></button>
         </span>
     </div>
-    <div id="editor-container">
+    <div id="editor-container" style="height: 500px">
     </div>
     </div>
 
@@ -114,6 +134,7 @@ include "../classes/user.class.php";
         let html = getQuillHtml();
         console.log ( html );
         document.getElementById('output-html').innerText = html;
+        document.getElementById('conteudo').value = html;
         updateHighlight();
     }
 
@@ -122,5 +143,24 @@ include "../classes/user.class.php";
     </script>
 
     <pre><code id="output-html"></code></pre>
+    <input type="hidden" name="conteudo" value="" id="conteudo">
+
+    <nav class="navbar navbar-light bg-light">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <span class="navbar-text">
+                    Autoria: <?php echo $_SESSION['user']['nome']?>, <?php echo date("d/m/Y")?>
+                </span>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <button type="submit" class="btn btn-outline-primary">Publicar</button>
+                <a href="index.php"><button type="button" class="btn btn-outline-danger">Voltar</button></a>
+            </li>
+        </ul>
+    </nav>
+
+    </form>
 
 </body>
