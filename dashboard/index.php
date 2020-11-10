@@ -98,7 +98,7 @@ include "../classes/admin.class.php";
     </table>
 
 
-    <form method="post" action="adicionar_usuario.php">
+    <form method="post" action="adicionar_usuario.act.php">
     <div class="modal" tabindex="-1" id="myModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">

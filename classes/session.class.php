@@ -22,7 +22,8 @@ class SESSION extends CONNECT{
                     break;
 
                 case 1:
-                    echo "nivel 1";
+                    $_SESSION['user'] = $data;
+                    header('Location: user/index.php');
                     exit();
                     break;
 

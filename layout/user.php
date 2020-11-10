@@ -3,11 +3,10 @@
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Administrador</div>
+      <div class="sidebar-heading">Usuário</div>
       <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action bg-light">Usuários</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Suas publicações</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Biblioteca</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Atividades</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
