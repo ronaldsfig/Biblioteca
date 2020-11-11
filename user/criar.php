@@ -15,6 +15,8 @@ include "session/verify.php";
     <link href="../layout/css/sidebar.css" rel="stylesheet">
     <script type="text/javascript" src="../bootstrap/js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="html2pdf.js"></script>
+    <script src="pdf.js"></script>
 </head>
 <body>
 
@@ -25,22 +27,6 @@ include "session/verify.php";
     <nav class="navbar navbar-light bg-light">
         <span class="navbar-brand mb-0 h1">Criar PDF</span>
     </nav>
-
-    <form method="post" action="gerar_pdf.act.php">
-
-    <!--div class="input-group input-group-lg mb-2">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-lg">Título</span>
-        </div>
-        <input type="text" name="titulo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-    </div>
-
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Subtítulo</span>
-        </div>
-        <input type="text" name="subtitulo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-    </div-->
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css" />
@@ -92,15 +78,14 @@ include "session/verify.php";
         <button class="ql-clean"></button>
         </span>
     </div>
-    <div id="editor-container" style="height: 500px">
+    <div id="editor-container" style="border: 0">
     </div>
     </div>
-
-    
     
     <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
 
     <script>
     var quill = new Quill('#editor-container', {
@@ -124,43 +109,33 @@ include "session/verify.php";
         return quill.root.innerHTML;
     }
 
-    // Highlight code output
-    function updateHighlight(){
-        hljs.highlightBlock( document.querySelector('#output-html') )
-    }
-
 
     function updateHtmlOutput(){
         let html = getQuillHtml();
-        console.log ( html );
-        document.getElementById('output-html').innerText = html;
-        document.getElementById('conteudo').value = html;
-        updateHighlight();
+        //ocument.getElementById('conteudo').value = html;
     }
 
-
     updateHtmlOutput()
-    </script>
 
-    <pre><code id="output-html"></code></pre>
-    <input type="hidden" name="conteudo" value="" id="conteudo">
+    </script>
 
     <nav class="navbar navbar-light bg-light">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <span class="navbar-text">
-                    Autoria: <?php echo $_SESSION['user']['nome']?>, <?php echo date("d/m/Y")?>
+                    - Certifique-se que seu navegar permita fazer downloads neste site.
+                    <br>
+                    - Aguarde após gerar o PDF, este processo pode demorar até minutos de acordo com o tamanho do texto.
                 </span>
             </li>
         </ul>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <button type="submit" class="btn btn-outline-primary">Gerar PDF</button>
+                <button id="btnCrearPdf" class="btn btn-outline-primary">Gerar PDF</button>
                 <a href="index.php"><button type="button" class="btn btn-outline-danger">Voltar</button></a>
             </li>
         </ul>
     </nav>
 
-    </form>
-
 </body>
+</html>
