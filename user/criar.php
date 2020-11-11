@@ -23,12 +23,12 @@ include "session/verify.php";
     ?>
 
     <nav class="navbar navbar-light bg-light">
-        <span class="navbar-brand mb-0 h1">Nova publicação</span>
+        <span class="navbar-brand mb-0 h1">Criar PDF</span>
     </nav>
 
-    <form method="post" action="publicar.act.php">
+    <form method="post" action="gerar_pdf.act.php">
 
-    <div class="input-group input-group-lg mb-2">
+    <!--div class="input-group input-group-lg mb-2">
         <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-lg">Título</span>
         </div>
@@ -40,7 +40,7 @@ include "session/verify.php";
             <span class="input-group-text" id="inputGroup-sizing-default">Subtítulo</span>
         </div>
         <input type="text" name="subtitulo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-    </div>
+    </div-->
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css" />
@@ -155,7 +155,7 @@ include "session/verify.php";
         </ul>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <button type="submit" class="btn btn-outline-primary">Publicar</button>
+                <button type="submit" class="btn btn-outline-primary">Gerar PDF</button>
                 <a href="index.php"><button type="button" class="btn btn-outline-danger">Voltar</button></a>
             </li>
         </ul>

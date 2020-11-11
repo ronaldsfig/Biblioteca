@@ -9,4 +9,5 @@ if (empty($_POST['email']) || empty($_POST['password'])) {
 
 $login = new SESSION;
     $result = $login->login($_POST['email'], $_POST['password']);
+$login->close();
 ?>

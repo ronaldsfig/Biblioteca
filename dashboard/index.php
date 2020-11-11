@@ -47,13 +47,22 @@ include "../classes/admin.class.php";
             </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
+                <div class="form-group">
+                    <select class="form-control" id="exampleFormControlSelect1">
+                    <option>Todas as permissões</option>
+                    <option>Administrador</option>
+                    <option>Nível 1</option>
+                    <option>Nível 2</option>
+                    <option>Nível 3</option>
+                    </select>
+                </div>
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Pesquisar</button>
             </form>
         </div>
     </nav>
 
-    <table class="table table-striped">
+    <table id="dtBasicExample" class="table table-striped table-sm" cellspacing="0" width="100%">
         <form method="post">
         <thead>
             <tr>
@@ -148,19 +157,19 @@ include "../classes/admin.class.php";
                         <div class="form-check">
                         <input class="form-check-input" type="radio" name="perm" id="gridRadios1" value="0" checked>
                         <label class="form-check-label" for="gridRadios1">
-                            Primeiro
+                            Nivel 1
                         </label>
                         </div>
                         <div class="form-check">
                         <input class="form-check-input" type="radio" name="perm" id="gridRadios2" value="1">
                         <label class="form-check-label" for="gridRadios2">
-                            Segundo
+                            Nivel 2
                         </label>
                         </div>
                         <div class="form-check">
                         <input class="form-check-input" type="radio" name="perm" id="gridRadios3" value="2">
                         <label class="form-check-label" for="gridRadios3">
-                            Terceiro
+                            Nivel 3
                         </label>
                         </div>
                     </div>
@@ -175,6 +184,7 @@ include "../classes/admin.class.php";
                         document.getElementsByName('confirma_senha')[0].classList.add('is-invalid');
                     }
                 }
+
                 </script>
 
             </div>
