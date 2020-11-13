@@ -23,7 +23,7 @@ class SESSION extends CONNECT{
             };
 
             switch ($data['perm']) {
-                case 0:
+                case 1:
                     $_SESSION['user'] = $data;
                     header('Location: dashboard/index.php');
                     exit();

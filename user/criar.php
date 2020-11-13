@@ -25,7 +25,7 @@ include "session/verify.php";
     ?>
 
     <nav class="navbar navbar-light bg-light">
-        <span class="navbar-brand mb-0 h1">Criar PDF</span>
+        <a class="navbar-brand">Criar PDF</a>
     </nav>
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
@@ -131,8 +131,8 @@ include "session/verify.php";
         </ul>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
+            <a href="index.php"><button type="button" class="btn btn-outline-secondary">Voltar</button></a>
                 <button id="btnCrearPdf" class="btn btn-outline-primary">Gerar PDF</button>
-                <a href="index.php"><button type="button" class="btn btn-outline-danger">Voltar</button></a>
             </li>
         </ul>
     </nav>

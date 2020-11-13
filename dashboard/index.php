@@ -23,15 +23,15 @@ include "../classes/admin.class.php";
 
         // <>VERIFICA SE HOUVE UMA TENTATIVA DE ADICIONAR UM USUARIO
 
-        if (isset($_SESSION['usuario_adicionado'])) {
-            echo "<div class='alert alert-success' role='alert'>Usuário inserido com sucesso!</div>";
+        if (isset($_SESSION['sucesso'])) {
+            echo "<div class='alert alert-success'>".$_SESSION['sucesso']."</div>";
         }
-        unset($_SESSION['usuario_adicionado']);
+        unset($_SESSION['sucesso']);
         
-        if (isset($_SESSION['usuario_nao_adicionado'])) {
-            echo "<div class='alert alert-danger' role='alert'>".$_SESSION['usuario_nao_adicionado']."</div>";
+        if (isset($_SESSION['erro'])) {
+            echo "<div class='alert alert-danger' role='alert'>".$_SESSION['erro']."</div>";
         }
-        unset($_SESSION['usuario_nao_adicionado']);
+        unset($_SESSION['erro']);
 
         // </>VERIFICA SE HOUVE UMA TENTATIVA DE ADICIONAR UM USUARIO
     ?>
@@ -63,7 +63,6 @@ include "../classes/admin.class.php";
     </nav>
 
     <table id="dtBasicExample" class="table table-striped table-lg" cellspacing="0" width="100%">
-        <form method="post">
         <thead>
             <tr>
             <th scope="col">Registro</th>
@@ -72,7 +71,7 @@ include "../classes/admin.class.php";
             <th scope="col">Data de Nascimento</th>
             <th scope="col">Permissão</th>
             <th scope="col">Condição</th>
-            <th scope="col"><button type="submit" name="alterar" class="btn btn-secondary">Ir para ações</button></th>
+            <th scope="col">Opções</th>
             </tr>
         </thead>
         <tbody>
@@ -90,19 +89,8 @@ include "../classes/admin.class.php";
                     <td><?php echo $key['email']; ?></td>
                     <td><?php echo date("m/d/Y", strtotime($key['data_nascimento'])); ?></td>
                     <td><?php echo $key['perm']; ?></td>
-                    <td><?php
-                        if ($key['condicao'] == 'enable') {
-                            echo "<svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-check' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-                            <path fill-rule='evenodd' d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z'/>
-                          </svg>";
-                        }else {
-                            echo "<svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-x-octagon' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-                            <path fill-rule='evenodd' d='M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1L1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z'/>
-                            <path fill-rule='evenodd' d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'/>
-                          </svg>";
-                        }
-                    ?></td>
-                    <td><input type='checkbox' name='selected[]' value=''></td>
+                    <td><?php echo $key['condicao'] ?></td>
+                    <td><a href="alterar_usuario.php?id=<?php echo $key['id'] ?>"><button class="btn btn-outline-info">Editar</button></a></td>
                 </tr>
                 <?php
                         endforeach;
@@ -112,7 +100,6 @@ include "../classes/admin.class.php";
                 ?>
             </tr>
         </tbody>
-        </form>
     </table>
 
 
@@ -168,21 +155,27 @@ include "../classes/admin.class.php";
                     <legend class="col-form-label col-sm-2 pt-0">Permissão:</legend>
                     <div class="col-sm-10">
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="perm" id="gridRadios1" value="0" checked>
+                        <input class="form-check-input" type="radio" name="perm" id="gridRadios1" value="2" checked>
                         <label class="form-check-label" for="gridRadios1">
                             Nivel 1
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="perm" id="gridRadios2" value="1">
+                        <input class="form-check-input" type="radio" name="perm" id="gridRadios2" value="3">
                         <label class="form-check-label" for="gridRadios2">
                             Nivel 2
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="perm" id="gridRadios3" value="2">
+                        <input class="form-check-input" type="radio" name="perm" id="gridRadios3" value="4">
                         <label class="form-check-label" for="gridRadios3">
                             Nivel 3
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="perm" id="gridRadios3" value="1">
+                        <label class="form-check-label" for="gridRadios3">
+                            Administrador
                         </label>
                         </div>
                     </div>
@@ -202,8 +195,8 @@ include "../classes/admin.class.php";
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="submit" name="inserir" class="btn btn-primary">Adicionar</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
+                <button type="submit" name="inserir" class="btn btn-outline-primary">Adicionar</button>
             </div>
             </div>
         </div>
