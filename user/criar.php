@@ -25,7 +25,7 @@ include "session/verify.php";
     ?>
 
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand">Criar PDF</a>
+        <a class="navbar-brand">Editor de texto</a>
     </nav>
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />

@@ -3,7 +3,7 @@
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Administrador</div>
+      <div class="sidebar-heading">Loja Nelson Mandela <span class="badge badge-secondary">Nº406</div>
       <div class="list-group list-group-flush">
         <a href="index.php" class="list-group-item list-group-item-action bg-light">Usuários</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">
