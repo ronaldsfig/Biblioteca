@@ -12,9 +12,12 @@ include "../classes/admin.class.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loja Nelson Mandela</title>
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" type="text/css">
-    <link href="../layout/css/sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../layout/css/sidebar.css">
     <script type="text/javascript" src="../bootstrap/js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 </head>
 <body>
 
@@ -46,62 +49,50 @@ include "../classes/admin.class.php";
                 <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">Adicionar novo</button>
             </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <div class="form-group">
-                    <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Todas as permissões</option>
-                    <option>Administrador</option>
-                    <option>Nível 1</option>
-                    <option>Nível 2</option>
-                    <option>Nível 3</option>
-                    </select>
-                </div>
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Pesquisar</button>
-            </form>
         </div>
     </nav>
 
-    <table id="dtBasicExample" class="table table-striped table-lg" cellspacing="0" width="100%">
+    <div class="card">
+    <div class="card-body">
+    <table id="tabela" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-            <th scope="col">Registro</th>
-            <th scope="col">Nome</th>
-            <th scope="col">E-mail</th>
-            <th scope="col">Data de Nascimento</th>
-            <th scope="col">Permissão</th>
-            <th scope="col">Condição</th>
-            <th scope="col">Opções</th>
+            <th>Registro</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Data de Nascimento</th>
+            <th>Permissão</th>
+            <th>Condição</th>
+            <th>Opções</th>
             </tr>
         </thead>
         <tbody>
+            <?php 
+            // <>EXIBE UMA LISTA DOS USUÁRIOS DO SISTEMA
+
+                $usuarios = new ADMIN();
+                    $datas = $usuarios->getAllUsers();
+                    foreach ($datas as $key):
+            ?>
             <tr>
-                <?php 
-                // <>EXIBE UMA LISTA DOS USUÁRIOS DO SISTEMA
-
-                    $usuarios = new ADMIN();
-                        $datas = $usuarios->getAllUsers();
-                        foreach ($datas as $key):
-                ?>
-                <tr>
-                    <th scope='row'><?php echo $key['id']; ?></th>
-                    <td><?php echo $key['nome']; ?></td>
-                    <td><?php echo $key['email']; ?></td>
-                    <td><?php echo date("m/d/Y", strtotime($key['data_nascimento'])); ?></td>
-                    <td><?php echo $key['perm']; ?></td>
-                    <td><?php echo $key['condicao'] ?></td>
-                    <td><a href="alterar_usuario.php?id=<?php echo $key['id'] ?>"><button class="btn btn-outline-info">Editar</button></a></td>
-                </tr>
-                <?php
-                        endforeach;
-                    $usuarios->close();
-
-                // </>EXIBE UMA LISTA DOS USUÁRIOS DO SISTEMA
-                ?>
+                <th><?php echo $key['id']; ?></th>
+                <td><?php echo $key['nome']; ?></td>
+                <td><?php echo $key['email']; ?></td>
+                <td><?php echo date("m/d/Y", strtotime($key['data_nascimento'])); ?></td>
+                <td><?php switch($key['perm']){case '1': echo "Administrador";break; case 2: echo "Nível 1";break; case 3: echo "Nível 2";break; case 4: echo "Nível 3";break;}; ?></td>
+                <td><?php if($key['condicao'] == 'enable'){echo "Habilitado";}else{echo "Desabilitado";}; ?></td>
+                <td><a href="alterar_usuario.php?id=<?php echo $key['id']; ?>"><button class="btn btn-outline-info">Editar</button></a></td>
             </tr>
+            <?php
+                    endforeach;
+                $usuarios->close();
+
+            // </>EXIBE UMA LISTA DOS USUÁRIOS DO SISTEMA
+            ?>
         </tbody>
     </table>
-
+    </div>
+    </div>
 
     <form method="post" action="adicionar_usuario.act.php">
     <div class="modal" tabindex="-1" id="myModal">
@@ -173,8 +164,8 @@ include "../classes/admin.class.php";
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="perm" id="gridRadios3" value="1">
-                        <label class="form-check-label" for="gridRadios3">
+                        <input class="form-check-input" type="radio" name="perm" id="gridRadios4" value="1">
+                        <label class="form-check-label" for="gridRadios4">
                             Administrador
                         </label>
                         </div>
@@ -202,6 +193,21 @@ include "../classes/admin.class.php";
         </div>
     </div>
     </form>
+
+    <script>
+        $(document).ready(function() {
+            $('#tabela').DataTable( {
+                "language": {
+                    "lengthMenu": "Mostrando _MENU_ registros por página",
+                    "zeroRecords": "Nada encontrado",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Não há registros disponíveis",
+                    "infoFiltered": "(Filtrado de _MAX_ registros no total)",
+                    "sSearch": "Pesquisar",
+                }
+            } );
+        } );
+    </script>
     
 </body>
 </html>

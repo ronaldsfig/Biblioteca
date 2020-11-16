@@ -99,5 +99,38 @@ class ADMIN extends CONNECT{
 
     }
 
+    public function getAllPosts(){
+
+        $sql = "SELECT p.id, u.nome, p.titulo, p.subtitulo, p.nome_arquivo, p.data_postagem, e.nome_perm FROM posts p JOIN usuarios u JOIN perm e ON p.id_autor = u.id AND p.perm = e.id;";
+
+        $result = $this->connection()->query($sql);
+        $numRows = $result->num_rows;
+
+        if ($numRows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            };
+        }
+
+        return $data;
+    }
+
+    public function recyclePost($nomeArquivo){
+
+        $sql = "DELETE FROM posts WHERE nome_arquivo = '$nomeArquivo';";
+
+        $origem = '../posts/'.$nomeArquivo;
+        $destino = '../posts/trash/'.$nomeArquivo;
+        copy($origem, $destino);
+        unlink($origem);
+
+        if ($this->connection()->query($sql) === TRUE) {
+            return true;
+        }else {
+            return 'Erro ao cadastrar!';
+        }
+
+    }
+
 }
 ?>

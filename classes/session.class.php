@@ -9,8 +9,7 @@ class SESSION extends CONNECT{
         $this->loginEmail = mysqli_real_escape_string($this->connection(), $email);
         $this->loginPassword = mysqli_real_escape_string($this->connection(), $password);
 
-        //$sql = "SELECT * FROM usuarios WHERE email = '{$this->loginEmail}' AND senha = MD5('{$this->loginPassword}')";
-        $sql = "SELECT * FROM usuarios WHERE email = '{$this->loginEmail}' AND senha = '{$this->loginPassword}'";
+        $sql = "SELECT * FROM usuarios WHERE email = '{$this->loginEmail}' AND senha = MD5('{$this->loginPassword}')";
         $result = $this->connection()->query($sql);
 
         if ($result->num_rows == 1) {

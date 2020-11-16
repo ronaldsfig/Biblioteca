@@ -32,6 +32,9 @@ include "session/verify.php";
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css" />
     <link rel="stylesheet" href="//cdn.quilljs.com/1.3.6/quill.snow.css" />
 
+    <div class="card">
+    <div class="card-body">
+
     <div id="standalone-container">
     <div id="toolbar-container">
         <span class="ql-formats">
@@ -79,6 +82,9 @@ include "session/verify.php";
         </span>
     </div>
     <div id="editor-container" style="border: 0">
+    </div>
+    </div>
+
     </div>
     </div>
     

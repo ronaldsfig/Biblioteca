@@ -24,17 +24,10 @@ session_start();
 					<div class="brand">
 						<img src="images/maconaria.jpg" alt="logo">
                     </div>
+					<div class="card-header text-center">
+						Loja Maçônica Nelson Mandela <span class="badge badge-secondary">Nº206</span>
+					</div>
 					<div class="card fat">
-						<nav aria-label="breadcrumb">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item" aria-current="page">
-								Loja Maçônica Nelson Mandela
-							</li>
-							<li class="breadcrumb-item active">
-								Nº 206
-							</li>
-						</ol>
-						</nav>
 						<div class="card-body">
 							<h4 class="card-title">Entrar</h4>
 
@@ -86,6 +79,9 @@ session_start();
 
 							</form>
 						</div>
+					</div>
+					<div class="card-footer text-muted text-center">
+						Última atualização: Versão 1.0 (Nov/2020)
 					</div>
 				</div>
 			</div>
