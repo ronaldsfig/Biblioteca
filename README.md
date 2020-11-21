@@ -1,3 +1,3 @@
-# Gerenciamento de Biblioteca
+# Biblioteca
  
 Sistema de gerenciamento de biblioteca
