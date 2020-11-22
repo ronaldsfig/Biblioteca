@@ -28,7 +28,7 @@
                 <?php echo $_SESSION['user']['nome']?>
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Perfil</a>
+                <a class="dropdown-item" href="#">Perfil (em breve)</a>
               <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="session/destroy.php">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-door-open" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

@@ -38,7 +38,7 @@ class USER extends CONNECT{
     }
 
     public function getUserPosts($idUsuario, $search){
-        $sql = "SELECT p.id, u.id, u.nome, p.titulo, p.subtitulo, p.nome_arquivo, p.data_postagem, e.nome_perm FROM posts p JOIN usuarios u JOIN perm e ON p.id_autor = u.id AND p.perm = e.id WHERE (u.id = '$idUsuario') AND (u.nome LIKE '%$search%' OR (p.titulo LIKE '%$search%' OR (p.subtitulo LIKE '%$search%' OR (e.nome_perm LIKE '%$search%')))) LIMIT 21;";
+        $sql = "SELECT p.id, u.id, u.nome, p.titulo, p.subtitulo, p.nome_arquivo, p.data_postagem, e.nome_perm FROM posts p JOIN usuarios u JOIN perm e ON p.id_autor = u.id AND p.perm = e.id WHERE (u.id = '$idUsuario') AND (u.nome LIKE '%$search%' OR (p.titulo LIKE '%$search%' OR (p.subtitulo LIKE '%$search%' OR (e.nome_perm LIKE '%$search%')))) ORDER BY p.data_postagem DESC LIMIT 21;";
 
         $result = $this->connection()->query($sql);
         $numRows = $result->num_rows;
@@ -57,15 +57,15 @@ class USER extends CONNECT{
     public function getPosts($search){
         switch ($this->perm) {
             case 2:
-                $sql = "SELECT p.id, u.nome, p.titulo, p.subtitulo, p.nome_arquivo, p.data_postagem, e.nome_perm FROM posts p JOIN usuarios u JOIN perm e ON p.id_autor = u.id AND p.perm = e.id WHERE (p.perm = '2') AND (u.nome LIKE '%$search%' OR (p.titulo LIKE '%$search%' OR (p.subtitulo LIKE '%$search%' OR (e.nome_perm LIKE '%$search%')))) LIMIT 21;";
+                $sql = "SELECT p.id, u.nome, p.titulo, p.subtitulo, p.nome_arquivo, p.data_postagem, e.nome_perm FROM posts p JOIN usuarios u JOIN perm e ON p.id_autor = u.id AND p.perm = e.id WHERE (p.perm = '2') AND (u.nome LIKE '%$search%' OR (p.titulo LIKE '%$search%' OR (p.subtitulo LIKE '%$search%' OR (e.nome_perm LIKE '%$search%')))) ORDER BY p.data_postagem DESC LIMIT 21;";
                 break;
 
             case 3:
-                $sql = "SELECT p.id, u.nome, p.titulo, p.subtitulo, p.nome_arquivo, p.data_postagem, e.nome_perm FROM posts p JOIN usuarios u JOIN perm e ON p.id_autor = u.id AND p.perm = e.id WHERE (p.perm = '2' OR p.perm = '3') AND (u.nome LIKE '%$search%' OR (p.titulo LIKE '%$search%' OR (p.subtitulo LIKE '%$search%' OR (e.nome_perm LIKE '%$search%')))) LIMIT 21;";
+                $sql = "SELECT p.id, u.nome, p.titulo, p.subtitulo, p.nome_arquivo, p.data_postagem, e.nome_perm FROM posts p JOIN usuarios u JOIN perm e ON p.id_autor = u.id AND p.perm = e.id WHERE (p.perm = '2' OR p.perm = '3') AND (u.nome LIKE '%$search%' OR (p.titulo LIKE '%$search%' OR (p.subtitulo LIKE '%$search%' OR (e.nome_perm LIKE '%$search%')))) ORDER BY p.data_postagem DESC LIMIT 21;";
                 break;
                 
             case 4:
-                $sql = "SELECT p.id, u.nome, p.titulo, p.subtitulo, p.nome_arquivo, p.data_postagem, e.nome_perm FROM posts p JOIN usuarios u JOIN perm e ON p.id_autor = u.id AND p.perm = e.id WHERE (u.nome LIKE '%$search%' OR (p.titulo LIKE '%$search%' OR (p.subtitulo LIKE '%$search%' OR (e.nome_perm LIKE '%$search%')))) LIMIT 21;";
+                $sql = "SELECT p.id, u.nome, p.titulo, p.subtitulo, p.nome_arquivo, p.data_postagem, e.nome_perm FROM posts p JOIN usuarios u JOIN perm e ON p.id_autor = u.id AND p.perm = e.id WHERE (u.nome LIKE '%$search%' OR (p.titulo LIKE '%$search%' OR (p.subtitulo LIKE '%$search%' OR (e.nome_perm LIKE '%$search%')))) ORDER BY p.data_postagem DESC LIMIT 21;";
                 break;
         };
 

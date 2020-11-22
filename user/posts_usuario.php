@@ -61,7 +61,7 @@ include "../classes/user.class.php";
             </li>
         </ul>
         <form method="post" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" name="busca" placeholder="Título, subtítulo, autor, nível" style="width: 300px" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search" name="busca" placeholder="Título, subtítulo, nível" style="width: 300px" aria-label="Search">
             <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Buscar</button>
         </form>
     </nav>

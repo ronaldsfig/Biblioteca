@@ -79,7 +79,7 @@ include "../classes/admin.class.php";
                 <td><?php echo $key['nome']; ?></td>
                 <td><?php echo $key['email']; ?></td>
                 <td><?php echo date("m/d/Y", strtotime($key['data_nascimento'])); ?></td>
-                <td><?php switch($key['perm']){case '1': echo "Administrador";break; case 2: echo "Nível 1";break; case 3: echo "Nível 2";break; case 4: echo "Nível 3";break;}; ?></td>
+                <td><?php switch($key['perm']){case '1': echo "Administrador";break; case 2: echo "A.M";break; case 3: echo "C.M";break; case 4: echo "M.M";break;}; ?></td>
                 <td><?php if($key['condicao'] == 'enable'){echo "Habilitado";}else{echo "Desabilitado";}; ?></td>
                 <td><a href="alterar_usuario.php?id=<?php echo $key['id']; ?>"><button class="btn btn-outline-info">Editar</button></a></td>
             </tr>
