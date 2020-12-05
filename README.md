@@ -1,3 +1,3 @@
 # NelsonMandela206
  
-Sistema de gerenciamento de biblioteca ronaldo.
+Sistema de gerenciamento de biblioteca.
