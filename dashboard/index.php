@@ -39,13 +39,13 @@ include "../classes/admin.class.php";
         // </>VERIFICA SE HOUVE UMA TENTATIVA DE ADICIONAR UM USUARIO
     ?>
 
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="navbar-brand">Usuários</a>
             </li>
             <li class="nav-item">
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">Adicionar novo</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">Adicionar</button>
             </li>
         </ul>
     </nav>
@@ -76,7 +76,7 @@ include "../classes/admin.class.php";
                 <th><?php echo $key['id']; ?></th>
                 <td><?php echo $key['nome']; ?></td>
                 <td><?php echo $key['email']; ?></td>
-                <td><?php echo date("m/d/Y", strtotime($key['data_nascimento'])); ?></td>
+                <td><?php echo date("d/m/Y", strtotime($key['data_nascimento'])); ?></td>
                 <td><?php switch($key['perm']){case '1': echo "Administrador";break; case 2: echo "A.M";break; case 3: echo "C.M";break; case 4: echo "M.M";break;}; ?></td>
                 <td><?php if($key['condicao'] == 'enable'){echo "Habilitado";}else{echo "Desabilitado";}; ?></td>
                 <td><a href="alterar_usuario.php?id=<?php echo $key['id']; ?>"><button class="btn btn-outline-info">Editar</button></a></td>
@@ -146,19 +146,19 @@ include "../classes/admin.class.php";
                         <div class="form-check">
                         <input class="form-check-input" type="radio" name="perm" id="gridRadios1" value="2" checked>
                         <label class="form-check-label" for="gridRadios1">
-                            Nivel 1
+                            A.M
                         </label>
                         </div>
                         <div class="form-check">
                         <input class="form-check-input" type="radio" name="perm" id="gridRadios2" value="3">
                         <label class="form-check-label" for="gridRadios2">
-                            Nivel 2
+                            C.M
                         </label>
                         </div>
                         <div class="form-check">
                         <input class="form-check-input" type="radio" name="perm" id="gridRadios3" value="4">
                         <label class="form-check-label" for="gridRadios3">
-                            Nivel 3
+                            M.M
                         </label>
                         </div>
                         <div class="form-check">
@@ -202,6 +202,12 @@ include "../classes/admin.class.php";
                     "infoEmpty": "Não há registros disponíveis",
                     "infoFiltered": "(Filtrado de _MAX_ registros no total)",
                     "sSearch": "Pesquisar",
+                    "oPaginate": {
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLast": "Último"
+                    }
                 }
             } );
         } );

@@ -49,9 +49,9 @@ include "../classes/admin.class.php";
                     <label for="inputPerm">Permissão:</label>
                     <select id="inputPerm" name="perm" class="form-control">
                         <option value="1" <?php if($datas['perm']=="1"){echo "selected";}?>>Administrador</option>
-                        <option value="2" <?php if($datas['perm']=="2"){echo "selected";}?>>Nível 1</option>
-                        <option value="3" <?php if($datas['perm']=="3"){echo "selected";}?>>Nível 2</option>
-                        <option value="4" <?php if($datas['perm']=="4"){echo "selected";}?>>Nível 3</option>
+                        <option value="2" <?php if($datas['perm']=="2"){echo "selected";}?>>A.M</option>
+                        <option value="3" <?php if($datas['perm']=="3"){echo "selected";}?>>C.M</option>
+                        <option value="4" <?php if($datas['perm']=="4"){echo "selected";}?>>M.M</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">

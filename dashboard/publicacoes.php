@@ -39,7 +39,7 @@ include "../classes/admin.class.php";
         // </>VERIFICA SE HOUVE UMA TENTATIVA DE %
     ?>
 
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="navbar-brand">Publicações</a>
@@ -76,7 +76,7 @@ include "../classes/admin.class.php";
                 <td><?php echo $key['titulo']; ?></td>
                 <td><?php echo $key['subtitulo']; ?></td>
                 <td><?php echo $key['nome_arquivo']; ?></td>
-                <td><?php echo date("m/d/Y", strtotime($key['data_postagem'])); ?></td>
+                <td><?php echo date("d/m/Y", strtotime($key['data_postagem'])); ?></td>
                 <td><?php echo $key['nome_perm']; ?></td>
                 <td>
                 <a href="../posts/<?php echo $key['nome_arquivo']?>"><button class="btn btn-outline-info">Visualizar</button></a>
@@ -104,6 +104,12 @@ include "../classes/admin.class.php";
                     "infoEmpty": "Não há registros disponíveis",
                     "infoFiltered": "(Filtrado de _MAX_ registros no total)",
                     "sSearch": "Pesquisar",
+                    "oPaginate": {
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLast": "Último"
+                    }
                 }
             } );
         } );
