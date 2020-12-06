@@ -39,22 +39,20 @@ include "../classes/admin.class.php";
         // </>VERIFICA SE HOUVE UMA TENTATIVA DE ADICIONAR UM USUARIO
     ?>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+    <nav class="navbar navbar-light bg-light">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="navbar-brand">Usuários</a>
             </li>
             <li class="nav-item">
                 <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">Adicionar novo</button>
             </li>
-            </ul>
-        </div>
+        </ul>
     </nav>
 
     <div class="card">
     <div class="card-body">
-    <table id="tabela" class="table table-striped table-bordered" style="width:100%">
+    <table id="tabela" class="table table-responsive-lg table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
             <th>Registro</th>
