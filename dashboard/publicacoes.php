@@ -78,11 +78,11 @@ include "../classes/admin.class.php";
                 <td><?php echo $key['titulo']; ?></td>
                 <td><?php echo $key['subtitulo']; ?></td>
                 <td><?php echo $key['nome_arquivo']; ?></td>
-                <td><?php echo date("m/d/Y", strtotime($key['data_postagem'])); ?></td>
+                <td><?php echo date("d/m/Y", strtotime($key['data_postagem'])); ?></td>
                 <td><?php echo $key['nome_perm']; ?></td>
                 <td>
                 <a href="../posts/<?php echo $key['nome_arquivo']?>"><button class="btn btn-outline-info">Visualizar</button></a>
-                <a href="reciclar_publicacao.php?nome_arquivo=<?php echo $key['nome_arquivo']?>"><button class="btn btn-outline-danger">Reciclar</button></a>
+                <a href="reciclar_publicacao.php?nome_arquivo=<?php echo $key['nome_arquivo']?>"><button class="btn btn-outline-danger">Arquivar</button></a>
                 </td>
             </tr>
             <?php
