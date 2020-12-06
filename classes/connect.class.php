@@ -9,7 +9,7 @@ class CONNECT {
         $this->host = "localhost";
         $this->username = "root";
         $this->password = "";
-        $this->database = "nm206";
+        $this->database = "sistema";
         
         $conn = new mysqli($this->host, $this->username, $this->password, $this->database);
 
