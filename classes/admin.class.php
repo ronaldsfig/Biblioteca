@@ -89,7 +89,7 @@ class ADMIN extends CONNECT{
 
     public function updateUserPassword($idUsuario, $senhaUsuario){
 
-        $sql = "UPDATE usuarios SET senha = '$senhaUsuario' WHERE id = '$idUsuario';";
+        $sql = "UPDATE usuarios SET senha = MD5('$senhaUsuario') WHERE id = '$idUsuario';";
 
         if ($this->connection()->query($sql) === TRUE) {
             return true;

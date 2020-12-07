@@ -15,6 +15,7 @@ include "../classes/user.class.php";
     <link href="../layout/css/sidebar.css" rel="stylesheet">
     <script type="text/javascript" src="../bootstrap/js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="loads/posts_usuario.js"></script>
 </head>
 <body>
 
@@ -61,7 +62,7 @@ include "../classes/user.class.php";
             </li>
         </ul>
         <form method="post" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" name="busca" placeholder="Título, subtítulo, nível" style="width: 300px" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search" name="busca" placeholder="Título, subtítulo, autor, nível" style="width: 300px" aria-label="Search" id="pesquisa">
             <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Buscar</button>
         </form>
     </nav>
@@ -69,7 +70,7 @@ include "../classes/user.class.php";
     <div class="card">
     <div class="card-body">
 
-    <div class="row">
+    <div class="row" id="conteudo">
 
     <?php
         if (isset($_POST['busca'])) {
