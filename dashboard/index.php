@@ -18,25 +18,13 @@ include "../classes/admin.class.php";
     <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script src="loads/adicionar_usuario.js"></script>
 </head>
 <body>
-
     <?php
+
         require_once "../layout/dashboard.php"; 
 
-        // <>VERIFICA SE HOUVE UMA TENTATIVA DE ADICIONAR UM USUARIO
-
-        if (isset($_SESSION['sucesso'])) {
-            echo "<div class='alert alert-success'>".$_SESSION['sucesso']."</div>";
-        }
-        unset($_SESSION['sucesso']);
-        
-        if (isset($_SESSION['erro'])) {
-            echo "<div class='alert alert-danger' role='alert'>".$_SESSION['erro']."</div>";
-        }
-        unset($_SESSION['erro']);
-
-        // </>VERIFICA SE HOUVE UMA TENTATIVA DE ADICIONAR UM USUARIO
     ?>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -92,7 +80,7 @@ include "../classes/admin.class.php";
     </div>
     </div>
 
-    <form method="post" action="adicionar_usuario.act.php">
+    <form method="post" name="f1" action="">
     <div class="modal" tabindex="-1" id="myModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -104,38 +92,46 @@ include "../classes/admin.class.php";
             </div>
             <div class="modal-body">
 
+                <div id="alert" role="alert"></div>
+
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label"><b>Nome:</b></label>
                     <div class="col-sm-10">
-                    <input type="text" name="nome" class="form-control" id="inputName3">
+                    <input type="text" name="nome" class="form-control" id="nome">
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email:</label>
+                    <label for="email" class="col-sm-2 col-form-label">Email:</label>
                     <div class="col-sm-10">
-                    <input type="email" name="email" class="form-control" id="inputEmail3">
+                    <input type="email" name="email" class="form-control" onblur='check_email(f1.email)' id="email">
+                    <div class="invalid-feedback">
+                        Informe um e-mail válido.
+                    </div>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Senha:</label>
+                    <label for="senha" class="col-sm-2 col-form-label">Senha:</label>
                     <div class="col-sm-10">
-                    <input type="password" class="form-control" name="senha" id="inputPassword3" onchange='check_pass();'>
+                    <input type="password" class="form-control" name="senha" id="senha" onchange='check_pass();'>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Confirmar Senha:</label>
+                    <label for="confirma_senha" class="col-sm-2 col-form-label">Confirmar Senha:</label>
                     <div class="col-sm-10">
-                    <input type="password" class="form-control" name="confirma_senha" id="inputPassword3" onchange='check_pass();'>
+                    <input type="password" class="form-control" name="confirma_senha" id="confirma_senha" onchange='check_pass();'>
+                    <div class="invalid-feedback">
+                        As senhas não conferem.
+                    </div>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputDate3" class="col-sm-2 col-form-label">Data Nascimento:</label>
+                    <label for="nascimento" class="col-sm-2 col-form-label">Data Nascimento:</label>
                     <div class="col-sm-10">
-                    <input type="date" class="form-control" name="nascimento" id="inputDate3">
+                    <input type="date" class="form-control" name="nascimento" id="nascimento">
                     </div>
                 </div>
 
@@ -144,26 +140,26 @@ include "../classes/admin.class.php";
                     <legend class="col-form-label col-sm-2 pt-0">Permissão:</legend>
                     <div class="col-sm-10">
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="perm" id="gridRadios1" value="2" checked>
-                        <label class="form-check-label" for="gridRadios1">
+                        <input class="form-check-input" type="radio" name="perm" id="perm2" value="2" checked>
+                        <label class="form-check-label" for="perm2">
                             A.M
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="perm" id="gridRadios2" value="3">
-                        <label class="form-check-label" for="gridRadios2">
+                        <input class="form-check-input" type="radio" name="perm" id="perm3" value="3">
+                        <label class="form-check-label" for="perm3">
                             C.M
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="perm" id="gridRadios3" value="4">
-                        <label class="form-check-label" for="gridRadios3">
+                        <input class="form-check-input" type="radio" name="perm" id="perm4" value="4">
+                        <label class="form-check-label" for="perm4">
                             M.M
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="perm" id="gridRadios4" value="1">
-                        <label class="form-check-label" for="gridRadios4">
+                        <input class="form-check-input" type="radio" name="perm" id="perm1" value="1">
+                        <label class="form-check-label" for="perm1">
                             Administrador
                         </label>
                         </div>
@@ -172,20 +168,43 @@ include "../classes/admin.class.php";
                 </fieldset>
 
                 <script>
-                function check_pass() {
-                    if (document.getElementsByName('senha')[0].value == document.getElementsByName('confirma_senha')[0].value) {
-                        document.getElementsByName('confirma_senha')[0].classList.remove('is-invalid');
-                    } else {
-                        document.getElementsByName('confirma_senha')[0].classList.add('is-invalid');
-                    }
-                }
+                    function check_email(field) {
+                        usuario = field.value.substring(0, field.value.indexOf("@"));
+                        dominio = field.value.substring(field.value.indexOf("@")+ 1, field.value.length);
 
+                        if ((usuario.length >=1) &&
+                            (dominio.length >=3) &&
+                            (usuario.search("@")==-1) &&
+                            (dominio.search("@")==-1) &&
+                            (usuario.search(" ")==-1) &&
+                            (dominio.search(" ")==-1) &&
+                            (dominio.search(".")!=-1) &&
+                            (dominio.indexOf(".") >=1)&&
+                            (dominio.lastIndexOf(".") < dominio.length - 1)) {
+                            document.getElementsByName('email')[0].classList.remove('is-invalid');
+                            document.getElementById('adicionar').disabled = false;
+                        }
+                        else{
+                            document.getElementsByName('email')[0].classList.add('is-invalid');
+                            document.getElementById('adicionar').disabled = true;
+                        }
+                    }
+
+                    function check_pass() {
+                        if (document.getElementsByName('senha')[0].value == document.getElementsByName('confirma_senha')[0].value) {
+                            document.getElementsByName('confirma_senha')[0].classList.remove('is-invalid');
+                            document.getElementById('adicionar').disabled = false;
+                        } else {
+                            document.getElementsByName('confirma_senha')[0].classList.add('is-invalid');
+                            document.getElementById('adicionar').disabled = true;
+                        }
+                    }
                 </script>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
-                <button type="submit" name="inserir" class="btn btn-outline-primary">Adicionar</button>
+                <button type="button" name="inserir" class="btn btn-outline-primary" id="adicionar">Adicionar</button>
             </div>
             </div>
         </div>

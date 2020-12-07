@@ -15,30 +15,18 @@ class ADMIN extends CONNECT{
         return $data;
     }
 
-    public function insertNewUser($nomeUsuario, $emailUsuario, $senhaUsuario, $nascimentoUsuario, $permUsuario){
-
-        if ($nomeUsuario == "") {
-            return 'Informe o nome do novo usuário!';
-        };
-
-        if ($emailUsuario == "") {
-            return 'Informe o e-mail do novo usuário!';
-        };
-
-        if ($senhaUsuario == "") {
-            return 'Informe a senha do novo usuário!';
-        };
-
-        if ($nascimentoUsuario == "") {
-            return 'Informe uma data de nascimento!';
-        };
-
+    public function verifyEmail($emailUsuario){
         $sql = "SELECT * FROM usuarios WHERE email = '$emailUsuario';";
         $result = $this->connection()->query($sql);
 
         if ($result->num_rows == 1) {
-            return 'Email já existente!';
-        };
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    public function insertNewUser($nomeUsuario, $emailUsuario, $senhaUsuario, $nascimentoUsuario, $permUsuario){
 
         $sqlInsert = "INSERT INTO usuarios (nome, email, senha, data_nascimento, perm, condicao) VALUES ('$nomeUsuario','$emailUsuario',MD5('$senhaUsuario'),'$nascimentoUsuario','$permUsuario', 'enable');";
 
