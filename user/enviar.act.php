@@ -9,7 +9,7 @@ $subtitulo = $_POST['subtitulo'];
 
 if ($titulo == "" || $subtitulo == "") {
     $_SESSION['erro'] = "Defina um título e subtítulo válidos!";
-    header('Location: posts_usuario.php');
+    header('Location: meus_posts.php');
     exit();
 };
 
@@ -17,7 +17,7 @@ if (isset($_FILES['arquivo'])) {
     $extensao = strtolower(substr($_FILES['arquivo']['name'], -4));
     if ($extensao !== ".pdf") {
         $_SESSION['erro'] = "Escolha um arquivo no formato PDF!";
-        header('Location: posts_usuario.php');
+        header('Location: meus_posts.php');
         exit();
     }
     $novonome = md5(time()).$extensao;
@@ -29,11 +29,11 @@ if (isset($_FILES['arquivo'])) {
         $result = $postar->newPost($_SESSION['user']['id'], $titulo, $subtitulo, $novonome);
         if ($result === TRUE) {
             $_SESSION['sucesso'] = 'Postagem realizada com sucesso';
-            header('Location: posts_usuario.php');
+            header('Location: meus_posts.php');
             exit();
         }else {
             $_SESSION['erro'] = $result;
-            header('Location: posts_usuario.php');
+            header('Location: meus_posts.php');
             exit();
         };
     $postar->close();

@@ -1,8 +1,6 @@
 <?php
 session_start();
 include "session/verify.php";
-include "../classes/connect.class.php";
-include "../classes/user.class.php";
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +13,7 @@ include "../classes/user.class.php";
     <link href="../layout/css/sidebar.css" rel="stylesheet">
     <script type="text/javascript" src="../bootstrap/js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
-    <script src="loads/posts_usuario.js"></script>
+    <script src="loads/meus_posts.js"></script>
 </head>
 <body>
 
@@ -25,12 +23,12 @@ include "../classes/user.class.php";
         // <>VERIFICA SE HOUVE UMA TENTATIVA DE %
 
         if (isset($_SESSION['sucesso'])) {
-            echo "<div class='alert alert-success' role='alert'>".$_SESSION['sucesso']."</div>";
+            echo "<div class='alert alert-success' role='alert' style='margin-bottom: auto;'>".$_SESSION['sucesso']."</div>";
         }
         unset($_SESSION['sucesso']);
         
         if (isset($_SESSION['erro'])) {
-            echo "<div class='alert alert-danger' role='alert'>".$_SESSION['erro']."</div>";
+            echo "<div class='alert alert-danger' role='alert' style='margin-bottom: auto;'>".$_SESSION['erro']."</div>";
         }
         unset($_SESSION['erro']);
 
@@ -63,7 +61,7 @@ include "../classes/user.class.php";
         </ul>
         <form method="post" class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" name="busca" placeholder="Título, subtítulo, autor, nível" style="width: 300px" aria-label="Search" id="pesquisa">
-            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Buscar</button>
+            <button class="btn btn-outline-secondary my-2 my-sm-0" type="button">Buscar</button>
         </form>
     </nav>
 
@@ -71,49 +69,6 @@ include "../classes/user.class.php";
     <div class="card-body">
 
     <div class="row" id="conteudo">
-
-    <?php
-        if (isset($_POST['busca'])) {
-            $search = $_POST['busca'];
-        }else {
-            $search = "";
-        }
-
-        $posts = new USER($_SESSION['user']['perm']);
-            $datas = $posts->getUserPosts($_SESSION['user']['id'], $search);
-            if ($datas === FALSE):
-    ?>
-
-    <div class="col" style="padding-right: 0; padding-left: 0">
-        Não há publicações suas no momento.
-    </div>
-
-    <?php
-            else:
-            foreach ($datas as $key):
-    ?>
-
-    <div class="col-6 col-md-4" style="padding-right: 5px; padding-left: 5px; padding-bottom: 5px">
-    <div class="card">
-        <div class="card-header">
-            <b><?php echo $key['nome']?></b> (<?php echo $key['nome_perm']?>)
-        </div>
-        <div class="card-body">
-            <p><h4><?php echo $key['titulo']?></h4></p>
-            <p><?php echo $key['subtitulo']?></p>
-            <a href="../posts/<?php echo $key['nome_arquivo']?>"><button type="button" class="btn btn-outline-info">Visualizar</button></a>
-        </div>
-        <div class="card-footer text-muted">
-            Postado em <?php echo date("d/m/Y H:i", strtotime($key['data_postagem']));?>
-        </div>
-    </div>
-    </div>
-
-    <?php
-            endforeach;
-            endif;
-        $posts->close();
-    ?>
 
     </div>
 

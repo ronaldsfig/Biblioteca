@@ -17,6 +17,13 @@ $permUsuario = $_POST['perm'];
 
     $inserir = new ADMIN();
         $result = $inserir->insertNewUser($nomeUsuario, $emailUsuario, $senhaUsuario, $nascimentoUsuario, $permUsuario);
+
+        if ($result === TRUE) {
+            $_SESSION['sucesso'] = 'Usuário adicionado com sucesso!';
+        }else {
+            $_SESSION['erro'] = $result;
+        };
+
     $inserir->close();
 
 ?>

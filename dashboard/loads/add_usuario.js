@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     $('#adicionar').click(function(){
         var nome = $('#nome').val();
         var email = $('#email').val();
@@ -45,7 +46,7 @@ $(document).ready(function(){
         $('#result').html('');
 
         $.ajax({
-            url: 'loads/verificar_email.php',
+            url: 'actions/vrf_email.php',
             type: 'POST',
             data: {email : email},
             dataType: 'json',
@@ -55,17 +56,11 @@ $(document).ready(function(){
                 $('#alert').addClass("alert alert-danger");	
               }else{
                 $.ajax({
-                    url:'loads/adicionar_usuario.php',
+                    url:'actions/add_usuario.php',
                     method: 'POST',
                     data: {nome: nome, email:email, senha:senha, confirma_senha: confirma_senha, nascimento:nascimento, perm:perm},
                     success: function(result) {
-                        $('form').trigger("reset");
-                        $('#alert').removeClass("alert alert-danger");
-                        $('#alert').addClass("alert alert-success");
-                        $('#alert').fadeIn().html("Usuário adicionado com sucesso!");
-                        setTimeout(function(){
-                            $('#alert').fadeOut('Slow');
-                        },3000);
+                        window.location.href = "index.php";
                     }
                 });
               }

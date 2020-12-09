@@ -1,8 +1,6 @@
 <?php
 session_start();
 include "session/verify.php";
-include "../classes/connect.class.php";
-include "../classes/admin.class.php";
 ?>
 
 <!DOCTYPE html>
@@ -18,13 +16,27 @@ include "../classes/admin.class.php";
     <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-    <script src="loads/adicionar_usuario.js"></script>
+    <script src="loads/usuarios.js"></script>
+    <script src="loads/add_usuario.js"></script>
 </head>
 <body>
-    <?php
 
+    <?php
         require_once "../layout/dashboard.php"; 
 
+        // <>VERIFICA SE HOUVE UMA TENTATIVA DE %
+
+        if (isset($_SESSION['sucesso'])) {
+            echo "<div class='alert alert-success' style='margin-bottom: auto;'>".$_SESSION['sucesso']."</div>";
+        }
+        unset($_SESSION['sucesso']);
+        
+        if (isset($_SESSION['erro'])) {
+            echo "<div class='alert alert-danger' role='alert' style='margin-bottom: auto;'>".$_SESSION['erro']."</div>";
+        }
+        unset($_SESSION['erro']);
+
+        // </>VERIFICA SE HOUVE UMA TENTATIVA DE %
     ?>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -52,29 +64,8 @@ include "../classes/admin.class.php";
             <th>Opções</th>
             </tr>
         </thead>
-        <tbody>
-            <?php 
-            // <>EXIBE UMA LISTA DOS USUÁRIOS DO SISTEMA
-
-                $usuarios = new ADMIN();
-                    $datas = $usuarios->getAllUsers();
-                    foreach ($datas as $key):
-            ?>
-            <tr>
-                <th><?php echo $key['id']; ?></th>
-                <td><?php echo $key['nome']; ?></td>
-                <td><?php echo $key['email']; ?></td>
-                <td><?php echo date("d/m/Y", strtotime($key['data_nascimento'])); ?></td>
-                <td><?php switch($key['perm']){case '1': echo "Administrador";break; case 2: echo "A.M";break; case 3: echo "C.M";break; case 4: echo "M.M";break;}; ?></td>
-                <td><?php if($key['condicao'] == 'enable'){echo "Habilitado";}else{echo "Desabilitado";}; ?></td>
-                <td><a href="alterar_usuario.php?id=<?php echo $key['id']; ?>"><button class="btn btn-outline-info">Editar</button></a></td>
-            </tr>
-            <?php
-                    endforeach;
-                $usuarios->close();
-
-            // </>EXIBE UMA LISTA DOS USUÁRIOS DO SISTEMA
-            ?>
+        <tbody id="conteudo">
+            
         </tbody>
     </table>
     </div>
@@ -167,40 +158,6 @@ include "../classes/admin.class.php";
                     </div>
                 </fieldset>
 
-                <script>
-                    function check_email(field) {
-                        usuario = field.value.substring(0, field.value.indexOf("@"));
-                        dominio = field.value.substring(field.value.indexOf("@")+ 1, field.value.length);
-
-                        if ((usuario.length >=1) &&
-                            (dominio.length >=3) &&
-                            (usuario.search("@")==-1) &&
-                            (dominio.search("@")==-1) &&
-                            (usuario.search(" ")==-1) &&
-                            (dominio.search(" ")==-1) &&
-                            (dominio.search(".")!=-1) &&
-                            (dominio.indexOf(".") >=1)&&
-                            (dominio.lastIndexOf(".") < dominio.length - 1)) {
-                            document.getElementsByName('email')[0].classList.remove('is-invalid');
-                            document.getElementById('adicionar').disabled = false;
-                        }
-                        else{
-                            document.getElementsByName('email')[0].classList.add('is-invalid');
-                            document.getElementById('adicionar').disabled = true;
-                        }
-                    }
-
-                    function check_pass() {
-                        if (document.getElementsByName('senha')[0].value == document.getElementsByName('confirma_senha')[0].value) {
-                            document.getElementsByName('confirma_senha')[0].classList.remove('is-invalid');
-                            document.getElementById('adicionar').disabled = false;
-                        } else {
-                            document.getElementsByName('confirma_senha')[0].classList.add('is-invalid');
-                            document.getElementById('adicionar').disabled = true;
-                        }
-                    }
-                </script>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
@@ -208,29 +165,41 @@ include "../classes/admin.class.php";
             </div>
             </div>
         </div>
+        <script>
+            function check_email(field) {
+                usuario = field.value.substring(0, field.value.indexOf("@"));
+                dominio = field.value.substring(field.value.indexOf("@")+ 1, field.value.length);
+
+                if ((usuario.length >=1) &&
+                    (dominio.length >=3) &&
+                    (usuario.search("@")==-1) &&
+                    (dominio.search("@")==-1) &&
+                    (usuario.search(" ")==-1) &&
+                    (dominio.search(" ")==-1) &&
+                    (dominio.search(".")!=-1) &&
+                    (dominio.indexOf(".") >=1)&&
+                    (dominio.lastIndexOf(".") < dominio.length - 1)) {
+                    document.getElementsByName('email')[0].classList.remove('is-invalid');
+                    document.getElementById('adicionar').disabled = false;
+                }
+                else{
+                    document.getElementsByName('email')[0].classList.add('is-invalid');
+                    document.getElementById('adicionar').disabled = true;
+                }
+            }
+
+            function check_pass() {
+                if (document.getElementsByName('senha')[0].value == document.getElementsByName('confirma_senha')[0].value) {
+                    document.getElementsByName('confirma_senha')[0].classList.remove('is-invalid');
+                    document.getElementById('adicionar').disabled = false;
+                } else {
+                    document.getElementsByName('confirma_senha')[0].classList.add('is-invalid');
+                    document.getElementById('adicionar').disabled = true;
+                }
+            }
+        </script>
     </div>
     </form>
-
-    <script>
-        $(document).ready(function() {
-            $('#tabela').DataTable( {
-                "language": {
-                    "lengthMenu": "Mostrando _MENU_ registros por página",
-                    "zeroRecords": "Nada encontrado",
-                    "info": "Mostrando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "Não há registros disponíveis",
-                    "infoFiltered": "(Filtrado de _MAX_ registros no total)",
-                    "sSearch": "Pesquisar",
-                    "oPaginate": {
-                        "sNext": "Próximo",
-                        "sPrevious": "Anterior",
-                        "sFirst": "Primeiro",
-                        "sLast": "Último"
-                    }
-                }
-            } );
-        } );
-    </script>
     
 </body>
 </html>

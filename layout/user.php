@@ -11,7 +11,7 @@
         </svg>
         Biblioteca
         </a>
-        <a href="posts_usuario.php" class="list-group-item list-group-item-action bg-light">Suas publicações</a>
+        <a href="meus_posts.php" class="list-group-item list-group-item-action bg-light">Suas publicações</a>
         <a href="enviar.php" class="list-group-item list-group-item-action bg-light">Enviar arquivo</a>
         <a href="criar.php" class="list-group-item list-group-item-action bg-light">Editor de texto</a>
       </div>

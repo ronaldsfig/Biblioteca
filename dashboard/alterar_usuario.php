@@ -73,6 +73,15 @@ include "../classes/admin.class.php";
                 </div>
             </div>
         </div>
+        <script>
+            function check_pass() {
+                if (document.getElementsByName('senha')[0].value == document.getElementsByName('confirma_senha')[0].value) {
+                    document.getElementsByName('confirma_senha')[0].classList.remove('is-invalid');
+                } else {
+                    document.getElementsByName('confirma_senha')[0].classList.add('is-invalid');
+                }
+            }
+        </script>
     </div>
 
     <nav class="navbar navbar-light bg-light">
@@ -94,15 +103,9 @@ include "../classes/admin.class.php";
 
     </form>
 
-    <script>
-        function check_pass() {
-            if (document.getElementsByName('senha')[0].value == document.getElementsByName('confirma_senha')[0].value) {
-                document.getElementsByName('confirma_senha')[0].classList.remove('is-invalid');
-            } else {
-                document.getElementsByName('confirma_senha')[0].classList.add('is-invalid');
-            }
-        }
-    </script>
+    <?php
+        $info->close();
+    ?>
 
 </body>
 </html>

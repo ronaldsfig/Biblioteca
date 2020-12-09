@@ -18,6 +18,7 @@ include "../classes/admin.class.php";
     <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script src="loads/posts.js"></script>
 </head>
 <body>
 
@@ -27,12 +28,12 @@ include "../classes/admin.class.php";
         // <>VERIFICA SE HOUVE UMA TENTATIVA DE %
 
         if (isset($_SESSION['sucesso'])) {
-            echo "<div class='alert alert-success'>".$_SESSION['sucesso']."</div>";
+            echo "<div class='alert alert-success' style='margin-bottom: auto;'>".$_SESSION['sucesso']."</div>";
         }
         unset($_SESSION['sucesso']);
         
         if (isset($_SESSION['erro'])) {
-            echo "<div class='alert alert-danger' role='alert'>".$_SESSION['erro']."</div>";
+            echo "<div class='alert alert-danger' role='alert' style='margin-bottom: auto;'>".$_SESSION['erro']."</div>";
         }
         unset($_SESSION['erro']);
 
@@ -62,58 +63,12 @@ include "../classes/admin.class.php";
             <th>Opções</th>
             </tr>
         </thead>
-        <tbody>
-            <?php 
-            // <>EXIBE UMA LISTA DAS POSTAGENS DO SISTEMA
-
-                $posts = new ADMIN();
-                    $datas = $posts->getAllPosts();
-                    foreach ($datas as $key):
-            ?>
-            <tr>
-                <th><?php echo $key['id']; ?></th>
-                <td><?php echo $key['nome']; ?></td>
-                <td><?php echo $key['titulo']; ?></td>
-                <td><?php echo $key['subtitulo']; ?></td>
-                <td><?php echo $key['nome_arquivo']; ?></td>
-                <td><?php echo date("d/m/Y", strtotime($key['data_postagem'])); ?></td>
-                <td><?php echo $key['nome_perm']; ?></td>
-                <td>
-                <a href="../posts/<?php echo $key['nome_arquivo']?>"><button class="btn btn-outline-info">Visualizar</button></a>
-                <a href="reciclar_publicacao.php?nome_arquivo=<?php echo $key['nome_arquivo']?>"><button class="btn btn-outline-danger">Arquivar</button></a>
-                </td>
-            </tr>
-            <?php
-                    endforeach;
-                $posts->close();
-
-            // </>EXIBE UMA LISTA DAS POSTAGENS DO SISTEMA
-            ?>
+        <tbody id="conteudo">
+            
         </tbody>
     </table>
     </div>
     </div>
-
-    <script>
-        $(document).ready(function() {
-            $('#tabela').DataTable( {
-                "language": {
-                    "lengthMenu": "Mostrando _MENU_ registros por página",
-                    "zeroRecords": "Nada encontrado",
-                    "info": "Mostrando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "Não há registros disponíveis",
-                    "infoFiltered": "(Filtrado de _MAX_ registros no total)",
-                    "sSearch": "Pesquisar",
-                    "oPaginate": {
-                        "sNext": "Próximo",
-                        "sPrevious": "Anterior",
-                        "sFirst": "Primeiro",
-                        "sLast": "Último"
-                    }
-                }
-            } );
-        } );
-    </script>
     
 </body>
 </html>

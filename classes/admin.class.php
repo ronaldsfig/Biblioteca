@@ -103,19 +103,19 @@ class ADMIN extends CONNECT{
         return $data;
     }
 
-    public function recyclePost($nomeArquivo){
+    public function shelvePost($nomeArquivo){
 
         $sql = "DELETE FROM posts WHERE nome_arquivo = '$nomeArquivo';";
 
-        $origem = '../posts/'.$nomeArquivo;
-        $destino = '../posts/trash/'.$nomeArquivo;
+        $origem = '../../posts/'.$nomeArquivo;
+        $destino = '../../posts/trash/'.$nomeArquivo;
         copy($origem, $destino);
         unlink($origem);
 
         if ($this->connection()->query($sql) === TRUE) {
             return true;
         }else {
-            return 'Erro ao cadastrar!';
+            return false;
         }
 
     }
