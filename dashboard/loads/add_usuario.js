@@ -8,42 +8,50 @@ $(document).ready(function(){
         var nascimento = $('#nascimento').val();
         var perm = $('input[name="perm"]:checked').val();
 
-        $('#result').html('');
+        $('#alert').html('');
+        $('#alert').removeClass("alert alert-danger");
+        $('#nome').removeClass("is-invalid");
+        $('#email').removeClass("is-invalid");
+        $('#senha').removeClass("is-invalid");
+        $('#confirma_senha').removeClass("is-invalid");
+        $('#nascimento').removeClass("is-invalid");
+
         if (nome == '') {
-            $('#alert').html('Preencha o nome.');
-            $('#alert').addClass("alert alert-danger");
-            return false;				
+            $('#nome').addClass("is-invalid");
+            return false;			
         }
 
-        $('#result').html('');
-        if (email == '') {
-            $('#alert').html('Preencha o e-mail.');
-            $('#alert').addClass("alert alert-danger");
-            return false;				
+        var usuario = email.substring(0, email.indexOf("@"));
+        var dominio = email.substring(email.indexOf("@")+ 1, email.length);
+
+        if ((usuario.length >=1) &&
+            (dominio.length >=3) &&
+            (usuario.search("@")==-1) &&
+            (dominio.search("@")==-1) &&
+            (usuario.search(" ")==-1) &&
+            (dominio.search(" ")==-1) &&
+            (dominio.search(".")!=-1) &&
+            (dominio.indexOf(".") >=1)&&
+            (dominio.lastIndexOf(".") < dominio.length - 1)) {
+        }else{
+            $('#email').addClass("is-invalid");
+            return false;
         }
 
-        $('#result').html('');
         if (senha == '') {
-            $('#alert').html('Preencha a senha.');
-            $('#alert').addClass("alert alert-danger");
-            return false;				
+            $('#senha').addClass("is-invalid");
+            return false;					
         }
 
-        $('#result').html('');
         if (confirma_senha !== senha) {
-            $('#alert').html('Confirme corretamente a senha.');
-            $('#alert').addClass("alert alert-danger");
+            $('#confirma_senha').addClass("is-invalid");
             return false;				
         }
 
-        $('#result').html('');
         if (nascimento == '') {
-            $('#alert').html('Informe uma data de nascimento.');
-            $('#alert').addClass("alert alert-danger");
-            return false;				
+            $('#nascimento').addClass("is-invalid");
+            return false;			
         }
-
-        $('#result').html('');
 
         $.ajax({
             url: 'actions/vrf_email.php',
@@ -58,10 +66,8 @@ $(document).ready(function(){
                 $.ajax({
                     url:'actions/add_usuario.php',
                     method: 'POST',
-                    data: {nome: nome, email:email, senha:senha, confirma_senha: confirma_senha, nascimento:nascimento, perm:perm},
-                    success: function(result) {
-                        window.location.href = "index.php";
-                    }
+                    data: {nome: nome, email:email, senha:senha, nascimento:nascimento, perm:perm},
+                    success: function() {window.location.href = "index.php";}
                 });
               }
         

@@ -4,26 +4,26 @@ include "../session/verify.php";
 include "../../classes/connect.class.php";
 include "../../classes/admin.class.php";
 
-if($_POST['nome'] === NULL){
+if($_POST['id'] === NULL){
     header("Location: ../index.php");
     exit;
 };
 
+$idUsuario = $_POST['id'];
 $nomeUsuario = $_POST['nome'];
 $emailUsuario = $_POST['email'];
 $senhaUsuario = $_POST['senha'];
 $nascimentoUsuario = $_POST['nascimento'];
 $permUsuario = $_POST['perm'];
+$condUsuario = $_POST['condicao'];
 
-    $inserir = new ADMIN();
-        $result = $inserir->insertNewUser($nomeUsuario, $emailUsuario, $senhaUsuario, $nascimentoUsuario, $permUsuario);
-
+    $editar = new ADMIN();
+        $result = $editar->updateUserDatas($idUsuario, $nomeUsuario, $emailUsuario, $nascimentoUsuario, $permUsuario, $condUsuario);
         if ($result === TRUE) {
-            $_SESSION['sucesso'] = 'Usuário adicionado com sucesso!';
+            $_SESSION['sucesso'] = 'Usuário editado com sucesso!';
         }else {
-            $_SESSION['erro'] = 'Erro ao adicionar usuário.';
+            $_SESSION['erro'] = 'Erro ao editar usuário.';
         };
-
-    $inserir->close();
+    $editar->close();
 
 ?>

@@ -89,6 +89,9 @@ include "session/verify.php";
                     <label for="inputEmail3" class="col-sm-2 col-form-label"><b>Nome:</b></label>
                     <div class="col-sm-10">
                     <input type="text" name="nome" class="form-control" id="nome">
+                    <div class="invalid-feedback">
+                        Informe um nome.
+                    </div>
                     </div>
                 </div>
 
@@ -106,6 +109,9 @@ include "session/verify.php";
                     <label for="senha" class="col-sm-2 col-form-label">Senha:</label>
                     <div class="col-sm-10">
                     <input type="password" class="form-control" name="senha" id="senha" onchange='check_pass();'>
+                    <div class="invalid-feedback">
+                        Informe uma senha.
+                    </div>
                     </div>
                 </div>
 
@@ -123,6 +129,9 @@ include "session/verify.php";
                     <label for="nascimento" class="col-sm-2 col-form-label">Data Nascimento:</label>
                     <div class="col-sm-10">
                     <input type="date" class="form-control" name="nascimento" id="nascimento">
+                    <div class="invalid-feedback">
+                        Informe uma data de nascimento.
+                    </div>
                     </div>
                 </div>
 
@@ -165,39 +174,6 @@ include "session/verify.php";
             </div>
             </div>
         </div>
-        <script>
-            function check_email(field) {
-                usuario = field.value.substring(0, field.value.indexOf("@"));
-                dominio = field.value.substring(field.value.indexOf("@")+ 1, field.value.length);
-
-                if ((usuario.length >=1) &&
-                    (dominio.length >=3) &&
-                    (usuario.search("@")==-1) &&
-                    (dominio.search("@")==-1) &&
-                    (usuario.search(" ")==-1) &&
-                    (dominio.search(" ")==-1) &&
-                    (dominio.search(".")!=-1) &&
-                    (dominio.indexOf(".") >=1)&&
-                    (dominio.lastIndexOf(".") < dominio.length - 1)) {
-                    document.getElementsByName('email')[0].classList.remove('is-invalid');
-                    document.getElementById('adicionar').disabled = false;
-                }
-                else{
-                    document.getElementsByName('email')[0].classList.add('is-invalid');
-                    document.getElementById('adicionar').disabled = true;
-                }
-            }
-
-            function check_pass() {
-                if (document.getElementsByName('senha')[0].value == document.getElementsByName('confirma_senha')[0].value) {
-                    document.getElementsByName('confirma_senha')[0].classList.remove('is-invalid');
-                    document.getElementById('adicionar').disabled = false;
-                } else {
-                    document.getElementsByName('confirma_senha')[0].classList.add('is-invalid');
-                    document.getElementById('adicionar').disabled = true;
-                }
-            }
-        </script>
     </div>
     </form>
     

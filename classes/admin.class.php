@@ -33,7 +33,7 @@ class ADMIN extends CONNECT{
         if ($this->connection()->query($sqlInsert) === TRUE) {
             return true;
         }else {
-            return 'Erro ao cadastrar!';
+            return false;
         }
     }
 
@@ -53,18 +53,6 @@ class ADMIN extends CONNECT{
     }
 
     public function updateUserDatas($idUsuario, $nomeUsuario, $emailUsuario, $nascimentoUsuario, $permUsuario, $condUsuario){
-        
-        if ($nomeUsuario == "") {
-            return 'Informe o novo nome do usuário!';
-        };
-
-        if ($emailUsuario == "") {
-            return 'Informe o novo e-mail usuário!';
-        };
-
-        if ($nascimentoUsuario == "") {
-            return 'Informe uma data de nascimento!';
-        };
 
         $sql = "UPDATE usuarios SET nome = '$nomeUsuario', email = '$emailUsuario', data_nascimento = '$nascimentoUsuario', perm = '$permUsuario', condicao = '$condUsuario' WHERE id = '$idUsuario';";
 
