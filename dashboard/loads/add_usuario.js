@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    $('#adicionar').click(function(){
+    $('#submit').click(function(){
         var nome = $('#nome').val();
         var email = $('#email').val();
         var senha = $('#senha').val();

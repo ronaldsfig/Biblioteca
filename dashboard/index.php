@@ -10,12 +10,12 @@ include "session/verify.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loja Nelson Mandela</title>
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../bootstrap/css/datatables-bootstrap4.min.css" type="text/css">
     <link rel="stylesheet" href="../layout/css/sidebar.css">
     <script type="text/javascript" src="../bootstrap/js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="../bootstrap/js/datatables-jquery.min.js"></script>
+    <script type="text/javascript" src="../bootstrap/js/datatables-bootstrap4.min.js"></script>
     <script src="loads/usuarios.js"></script>
     <script src="loads/add_usuario.js"></script>
 </head>
@@ -71,7 +71,7 @@ include "session/verify.php";
     </div>
     </div>
 
-    <form method="post" name="f1" action="">
+    <form method="post" action="">
     <div class="modal" tabindex="-1" id="myModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -98,7 +98,7 @@ include "session/verify.php";
                 <div class="form-group row">
                     <label for="email" class="col-sm-2 col-form-label">Email:</label>
                     <div class="col-sm-10">
-                    <input type="email" name="email" class="form-control" onblur='check_email(f1.email)' id="email">
+                    <input type="email" name="email" class="form-control" id="email">
                     <div class="invalid-feedback">
                         Informe um e-mail válido.
                     </div>
@@ -108,7 +108,7 @@ include "session/verify.php";
                 <div class="form-group row">
                     <label for="senha" class="col-sm-2 col-form-label">Senha:</label>
                     <div class="col-sm-10">
-                    <input type="password" class="form-control" name="senha" id="senha" onchange='check_pass();'>
+                    <input type="password" class="form-control" name="senha" id="senha">
                     <div class="invalid-feedback">
                         Informe uma senha.
                     </div>
@@ -118,7 +118,7 @@ include "session/verify.php";
                 <div class="form-group row">
                     <label for="confirma_senha" class="col-sm-2 col-form-label">Confirmar Senha:</label>
                     <div class="col-sm-10">
-                    <input type="password" class="form-control" name="confirma_senha" id="confirma_senha" onchange='check_pass();'>
+                    <input type="password" class="form-control" name="confirma_senha" id="confirma_senha">
                     <div class="invalid-feedback">
                         As senhas não conferem.
                     </div>
@@ -170,7 +170,7 @@ include "session/verify.php";
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" name="inserir" class="btn btn-outline-primary" id="adicionar">Adicionar</button>
+                <button type="button" name="inserir" class="btn btn-outline-primary" id="submit">Adicionar</button>
             </div>
             </div>
         </div>
