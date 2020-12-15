@@ -33,7 +33,7 @@ class USER extends CONNECT{
         if ($this->connection()->query($sql) === TRUE) {
             return true;
         }else {
-            return 'Erro ao enviar enviar arquivo!';
+            return false;
         }
     }
 

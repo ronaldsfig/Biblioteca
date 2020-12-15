@@ -1,7 +1,5 @@
 <?php
 session_start();
-include "../classes/connect.class.php";
-include "../classes/user.class.php";
 include "session/verify.php";
 ?>
 
@@ -15,8 +13,8 @@ include "session/verify.php";
     <link rel="stylesheet" href="../layout/css/sidebar.css" type="text/css">
     <script type="text/javascript" src="../bootstrap/js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
-    <script src="html2pdf.js"></script>
-    <script src="pdf.js"></script>
+    <script src="loads/html2pdf.js"></script>
+    <script src="loads/pdf.js"></script>
 </head>
 <body>
 
