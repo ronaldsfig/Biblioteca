@@ -9,11 +9,11 @@ include "session/verify.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loja Nelson Mandela</title>
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="../bootstrap/css/datatables-bootstrap4.min.css" type="text/css">
     <link rel="stylesheet" href="../layout/css/sidebar.css">
     <script type="text/javascript" src="../bootstrap/js/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript" src="../bootstrap/js/datatables-jquery.min.js"></script>
     <script type="text/javascript" src="../bootstrap/js/datatables-bootstrap4.min.js"></script>
     <script src="loads/usuarios.js"></script>
